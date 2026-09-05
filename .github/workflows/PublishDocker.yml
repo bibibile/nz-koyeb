@@ -3,7 +3,7 @@ name: Publish to Docker Hub
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # 这是一个手动触发按钮，配置好后可以立即点击运行
+  workflow_dispatch: # 手动触发按钮
 
 jobs:
   build-and-push-to-dockerhub:
@@ -31,7 +31,7 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          # 直接使用您指定的镜像名 nezser00，推送到 docker 账号下
+          # 这里去掉了 {{ github.sha }}，只保留一个干净的 latest
+          # 如果您想命名为 nezser00，请将 nv1 改回 nezser00
           tags: |
-            babav5v6/nezser00:latest
-            babav5v6/nezser00:${{ github.sha }}
+            babav5v6/nv1:latest
